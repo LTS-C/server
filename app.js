@@ -11,6 +11,8 @@ var blocks = require('./routes/blocks');
 
 var app = express();
 
+var p2p = require('./app/modules/p2p');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -26,6 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/blocks', blocks);
+
+
 
 
 // catch 404 and forward to error handler
@@ -45,5 +49,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+p2p.initP2PServer();
 
 module.exports = app;
